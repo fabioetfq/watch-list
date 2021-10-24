@@ -1,3 +1,11 @@
 <h1><%= @list.name %></h1>
 
 <p><%= link_to 'New bookmark', new_list_bookmark_path(@list) %></p>
+
+<% @list.movies.each do |movie| %>
+  <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+  <p>Title: <%= movie.title %></p>
+  <p>Overview: <%= movie.overview %></p>
+  <p>Comment: <%= bookmark.comment %></p>
+  <%= link_to 'Delete', bookmark_path(bookmark) %>
+<% end %>
